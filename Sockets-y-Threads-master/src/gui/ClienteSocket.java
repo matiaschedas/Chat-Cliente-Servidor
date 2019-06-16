@@ -5,6 +5,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
+import com.google.gson.Gson;
+
 public class ClienteSocket extends Thread{
 	
 	private Socket socket;
@@ -83,8 +85,13 @@ public class ClienteSocket extends Thread{
 					flag=false;
 				}
 				else {
-					ClienteServidor.sharedInstance().distribuir(message,nroCliente,nombre);
+					Mensaje msj = new Mensaje(nombre,message);
+					Gson gson = new Gson();
+					String msjJSON= gson.toJson(msj);
+					
+					ClienteServidor.sharedInstance().distribuir(msjJSON);
 					//System.out.println(message);
+					
 					ClienteServidor.sharedInstance().messageRecived(this.nroCliente, message);
 				}
 			} 

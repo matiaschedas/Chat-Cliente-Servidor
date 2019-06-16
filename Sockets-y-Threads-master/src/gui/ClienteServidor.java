@@ -25,9 +25,9 @@ public class ClienteServidor {
 		return cliente;
 	}
 	
-	public void distribuir(String mensaje, int nroCliente, String nombre) {
+	public void distribuir(String mensaje) {
 		for(int i=0;i<clientes.size();i++) {
-			clientes.get(i).writeMessage(nombre+"/"+mensaje);
+			clientes.get(i).writeMessage(mensaje);
 		}
 	}
 
